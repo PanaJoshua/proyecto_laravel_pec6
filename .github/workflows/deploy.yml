@@ -12,7 +12,7 @@ jobs:
       - name: Deploy Laravel con Sail Practica 2
         run: |
           set -e
-          cd /home/panajoshua/development/laravel/libreria
+          cd /home/panajoshua/Documentos/DAW/libreria
           git pull
           ./vendor/bin/sail down
           ./vendor/bin/sail up -d --build
