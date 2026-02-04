@@ -14,6 +14,7 @@ jobs:
           set -e
           cd /home/panajoshua/Documentos/DAW/libreria
           git pull
+          composer install
           ./vendor/bin/sail down
           ./vendor/bin/sail up -d --build
           ./vendor/bin/sail artisan migrate --force
