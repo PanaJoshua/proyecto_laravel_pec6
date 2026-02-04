@@ -1,4 +1,4 @@
-name: Deploy Laravel Sail Practica 2
+name: Deploy Laravel Sail Practica 2 Pec6
 
 on:
   push:
