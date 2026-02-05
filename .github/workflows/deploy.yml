@@ -1,4 +1,4 @@
-name: Deploy Laravel Sail Practica 2 Pec6
+name: Deploy Laravel Sail Ejercicio 2 Pec6
 
 on:
   push:
@@ -6,14 +6,21 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy Laravel con Sail Practica 2
-        run: |
-          set -e
-          cd /home/panajoshua/Documentos/DAW/libreria
-          git pull
-          composer install
-          ./vendor/bin/sail down
-          ./vendor/bin/sail up -d --build
+      - name: Deploy remoto con Sail de un proyecto Laravel en un VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+            cd /var/www/libreria
+            git pull
+            ./vendor/bin/sail down
+            ./vendor/bin/sail up -d --build
+            ./vendor/bin/sail npm install
+            ./vendor/bin/sail npm run build
+            ./vendor/bin/sail artisan migrate
